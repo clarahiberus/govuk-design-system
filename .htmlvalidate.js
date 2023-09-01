@@ -19,6 +19,9 @@ module.exports = {
     // Allow for conditional comments (used in header for fallback png)
     'no-conditional-comment': 'off',
 
+    // Allow implicit type="button" without type attribute
+    'no-implicit-button-type': 'off',
+
     // Allow inline styles for testing purposes
     'no-inline-style': 'off',
 
