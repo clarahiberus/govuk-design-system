@@ -1,0 +1,289 @@
+/* ==========================================================================
+   AGILA — Home
+   Estética plana: sin sombras, sin degradados, sin bordes redondeados.
+   ========================================================================== */
+
+:root {
+  /* Identidad */
+  --rojo: #DD1E25;   /* fondo principal */
+  --negro: #21201F;  /* logo y textos */
+  --blanco: #FAFAFA; /* solo sobre fotografía / documentos. NUNCA texto sobre rojo */
+  --rosa: #F68090;   /* acento puntual */
+
+  /* Tipografía: cambiar aquí para usar Neue Haas u otra grotesca */
+  --fuente: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* Tamaños. Negro sobre rojo ≈ 3,3:1 → solo texto grande:
+     ≥ 24px, o ≥ 18.66px en negrita. Todo texto más pequeño va en banda negra + rosa. */
+  --t-esquina: 1.25rem;     /* 20px negrita */
+  --t-banda: 0.9375rem;     /* 15px, solo sobre banda negra con texto rosa */
+
+  --margen: 16px;
+  --foco: 4px solid var(--negro);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--rojo);
+  color: var(--negro);
+  font-family: var(--fuente);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  overflow-x: hidden;
+}
+
+a { color: inherit; }
+
+button {
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Foco visible: outline negro grueso con offset */
+:focus-visible {
+  outline: var(--foco);
+  outline-offset: 4px;
+}
+
+.visualmente-oculto {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Layout
+   -------------------------------------------------------------------------- */
+
+.home {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  padding-top: env(safe-area-inset-top);
+}
+
+.esquina-sup,
+.esquina-inf {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--margen);
+  padding: var(--margen);
+}
+
+.esquina-sup { align-items: flex-start; }
+
+.esquina-inf {
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.marca {
+  font-size: var(--t-esquina);
+  max-width: 10ch; /* "SELLO —" / "EXTREMADURA" en móvil */
+}
+
+/* --- Navegación: en móvil, banda negra con texto rosa (texto pequeño) --- */
+.nav ul {
+  list-style: none;
+}
+
+.nav {
+  background: var(--negro);
+  color: var(--rosa);
+  font-size: var(--t-banda);
+}
+
+.nav a {
+  display: block;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.nav a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+
+/* En la banda negra el outline negro no se vería: invertimos además */
+.nav a:focus-visible,
+.sonando__btn:focus-visible {
+  background: var(--rosa);
+  color: var(--negro);
+}
+
+/* --- Logo --- */
+.escenario {
+  display: flex;
+  align-items: flex-end;           /* ligeramente hacia abajo */
+  justify-content: flex-start;
+  padding-bottom: 4vh;
+  min-height: 0;
+}
+
+.logo {
+  display: block;
+  width: 92vw;
+  height: auto;
+  margin-left: 1.5vw;              /* desplazado a la izquierda: 1,5vw / 6,5vw */
+  color: var(--negro);
+  overflow: visible;               /* el temblor puede salirse */
+}
+
+.logo.is-cargando { visibility: hidden; }
+
+.letra {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+/* Variante de movimiento reducido: destello rosa puntual */
+.letra--destello { fill: var(--rosa); }
+
+/* --- Reproductor (banda negra + rosa: contraste ≈ 6,5:1) --- */
+.banda {
+  background: var(--negro);
+  color: var(--rosa);
+}
+
+.sonando {
+  display: flex;
+  align-items: stretch;
+  font-size: var(--t-banda);
+  max-width: 100%;
+  flex: 1 1 100%;
+}
+
+.sonando__texto {
+  padding: 12px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.sonando__btn {
+  flex: 0 0 auto;
+  background: var(--rosa);
+  color: var(--negro);
+  padding: 12px 16px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.sonando__btn:focus-visible { outline-offset: 2px; }
+
+.sonando__btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  background: transparent;
+  color: var(--rosa);
+  text-decoration: line-through;
+}
+
+/* --- Instrucción + botón Agitar --- */
+.accion {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.instruccion { font-size: var(--t-esquina); text-align: right; }
+
+.instr-tactil { display: none; }
+
+@media (hover: none) and (pointer: coarse) {
+  .instr-raton { display: none; }
+  .instr-tactil { display: inline; }
+}
+
+.btn-agitar {
+  background: var(--negro);
+  color: var(--rosa);
+  font-size: var(--t-esquina);
+  padding: 12px 20px;
+  min-height: 48px;
+}
+
+.btn-agitar:hover { background: var(--rosa); color: var(--negro); }
+
+/* --- Activación iOS / audio en táctil: botón negro a todo el ancho abajo --- */
+.btn-activar {
+  width: 100%;
+  background: var(--negro);
+  color: var(--rosa);
+  font-size: var(--t-esquina);
+  padding: 22px var(--margen) calc(22px + env(safe-area-inset-bottom));
+}
+
+.btn-activar:focus-visible { outline-offset: -8px; outline-color: var(--rosa); }
+
+.btn-activar[hidden] { display: none; }
+
+/* --------------------------------------------------------------------------
+   Desktop
+   -------------------------------------------------------------------------- */
+@media (min-width: 760px) {
+  :root {
+    --margen: 28px;
+    --t-esquina: 1.5rem; /* 24px */
+  }
+
+  .marca { max-width: none; }
+
+  /* Nav en negro sobre rojo, a tamaño grande (≥ 24px) */
+  .nav {
+    background: transparent;
+    color: var(--negro);
+    font-size: var(--t-esquina);
+  }
+
+  .nav ul { display: flex; gap: 4px 24px; flex-wrap: wrap; justify-content: flex-end; }
+  .nav a { padding: 4px 0; }
+  .nav a:focus-visible { background: transparent; color: var(--negro); }
+
+  .logo {
+    width: 90vw;
+    margin-left: 2vw;
+  }
+
+  .sonando { flex: 0 1 auto; max-width: 60%; }
+}
+
+/* --------------------------------------------------------------------------
+   Movimiento reducido: ningún desplazamiento ni rotación
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .letra {
+    transform: none !important;
+    will-change: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

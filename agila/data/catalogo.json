@@ -1,0 +1,7 @@
+[
+  { "id": "AGL-001", "artista": "Encina Brava", "titulo": "Kilómetro Cero", "src": "audio/agl-001.mp3" },
+  { "id": "AGL-002", "artista": "Los Jaras", "titulo": "Sur o Nada", "src": "audio/agl-002.mp3" },
+  { "id": "AGL-003", "artista": "Dehesa Eléctrica", "titulo": "Periferia Central", "src": "audio/agl-003.mp3" },
+  { "id": "AGL-004", "artista": "Corcho", "titulo": "No Encajar", "src": "audio/agl-004.mp3" },
+  { "id": "AGL-005", "artista": "La Bellota Negra", "titulo": "Agitar", "src": "audio/agl-005.mp3" }
+]

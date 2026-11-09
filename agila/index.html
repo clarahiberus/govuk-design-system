@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Agila — Sello musical de Extremadura</title>
+  <meta name="description" content="Agila, sello musical de Extremadura. No pretende encajar, sino agitar.">
+  <meta name="theme-color" content="#DD1E25">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="home">
+
+    <header class="esquina-sup">
+      <p class="marca">Sello — Extremadura</p>
+      <nav class="nav" aria-label="Principal">
+        <ul>
+          <li><a href="#">Artistas</a></li>
+          <li><a href="#">Catálogo</a></li>
+          <li><a href="#">Conciertos</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="escenario">
+      <h1 class="visualmente-oculto">Agila</h1>
+      <!--
+        TODO(AGILA): LOGO PROVISIONAL inline. main.js intenta cargar
+        assets/agila-logo.svg (solo con servidor http) y lo sustituye aquí.
+        Abriendo el archivo directamente (file://) se usa este placeholder.
+      -->
+      <svg id="logo" class="logo" role="img" aria-label="Agila"
+           xmlns="http://www.w3.org/2000/svg" viewBox="0 0 872 260" fill="currentColor" data-placeholder="true">
+        <g id="letra-a" class="letra">
+          <path fill-rule="evenodd" d="M0 260 L72 0 H112 L184 260 H130 L116 208 H68 L54 260 Z M80 160 H104 L92 112 Z"/>
+        </g>
+        <g id="letra-g" class="letra">
+          <path d="M388 0 H260 L204 56 V204 L260 260 H388 V118 H300 V168 H338 V210 H282 L254 182 V78 L282 50 H388 Z"/>
+        </g>
+        <g id="letra-i" class="letra">
+          <path d="M408 0 H466 V218 L408 260 Z"/>
+        </g>
+        <g id="letra-l" class="letra">
+          <path d="M486 0 H542 V204 H650 L668 260 H486 Z"/>
+        </g>
+        <g id="letra-a2" class="letra">
+          <path fill-rule="evenodd" d="M688 260 L760 0 H800 L872 260 H818 L804 208 H756 L742 260 Z M768 160 H792 L780 112 Z"/>
+        </g>
+      </svg>
+    </main>
+
+    <footer class="esquina-inf">
+      <section class="sonando banda" aria-label="Reproductor">
+        <p class="sonando__texto" id="sonando-texto">■ En silencio</p>
+        <button type="button" class="sonando__btn" id="btn-pausa" aria-disabled="true">Pausa</button>
+      </section>
+
+      <div class="accion">
+        <p class="instruccion">
+          <span class="instr-raton">Pasa el ratón</span>
+          <span class="instr-tactil">Agita el móvil</span>
+        </p>
+        <button type="button" class="btn-agitar" id="btn-agitar"
+                aria-describedby="ayuda-agitar">Agitar</button>
+        <p class="visualmente-oculto" id="ayuda-agitar">Reproduce un tema aleatorio del catálogo. Atajo: tecla Espacio.</p>
+      </div>
+    </footer>
+
+    <button type="button" class="btn-activar" id="btn-activar" hidden>
+      Toca para activar · luego agita
+    </button>
+  </div>
+
+  <!-- Único elemento de audio, reutilizado para todos los temas -->
+  <audio id="player" preload="none"></audio>
+
+  <!-- Anuncios para lectores de pantalla -->
+  <div class="visualmente-oculto" id="anuncio" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="main.js"></script>
+</body>
+</html>
